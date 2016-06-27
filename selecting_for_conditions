@@ -1,0 +1,21 @@
+select * from pet 
+where age > 10;
+
+select * from person
+where age < 55;
+
+select * from person
+where age > 15;
+
+select * from person
+where age > 20 and first_name = 'Dave';
+
+select customers.title, customers.firstname, customers.lastname, positions.position,
+customers.streetaddress, cities.city, states.state from customers
+inner join positions
+on positions.positionID = customers.positionID
+inner join states
+on states.stateID = customers.stateID
+inner join cities
+on cities.cityID = customers.cityID
+where (states.state = 'MD' and cities.city = 'Rockville') or states.state='VA';
