@@ -90,6 +90,91 @@ select * from customers
 inner join companies
 on companies.companyID = customers.companyID;
 
+-- Day 13 - Selecting Data
+select * from pet 
+where age > 10;
+
+select * from person
+where age < 55;
+
+select * from person
+where age > 15;
+
+select * from person
+where age > 20 and first_name = 'Dave';
+
+select customers.title, customers.firstname, customers.lastname, positions.position,
+customers.streetaddress, cities.city, states.state from customers
+inner join positions
+on positions.positionID = customers.positionID
+inner join states
+on states.stateID = customers.stateID
+inner join cities
+on cities.cityID = customers.cityID
+where (states.state = 'MD' and cities.city = 'Rockville') or states.state='VA';
+
+-- create tables for MC students, courses, majors, and departments
+create table MCStudent (StudentID int, FirstName varchar(50), LastName varchar(50),
+Address varchar(50), City varchar(50), State varchar(2), ZIP int, Phone varchar(50), Major varchar(50));
+
+create table Courses (CourseID int, course varchar(50));
+create table Majors (majorID int, major varchar(50), departmentID int);
+
+create table MCDepartments (departmentID int, department varchar(50), dept_head varchar(50));
+
+update MCSTUDENTS
+set major = 1
+where studentID < 40;
+
+update MCSTUDENTS
+set major = 2
+where studentID >= 40 and studentID < 70;
+
+update MCSTUDENTS
+set major = 3
+where studentID >=70;
+
+select MCstudents.FIRSTNAME, MCstudents.LASTNAME, MCstudents.MAJORID, majors.MAJOR from MCstudents
+inner join majors
+on majors.majorid = mcstudents.majorid;
+
+-- display the major and department for all students
+select MCstudents.FIRSTNAME, MCstudents.LASTNAME, MCstudents.MAJORID, MAJORS.MAJOR, MCdepartments.department
+from MCstudents
+inner join majors
+on majors.majorid = mcstudents.majorid
+inner join MCDEPARTMENTS
+on MCDEPARTMENTS.DEPARTMENTID = MAJORS.DEPARTMENTID;
+
+-- display all students in the "computer science" department
+select MCstudents.FIRSTNAME, MCstudents.LASTNAME, MCstudents.MAJORID, MAJORS.MAJOR, MCdepartments.department
+from MCstudents
+inner join majors
+on majors.majorid = mcstudents.majorid
+inner join MCDEPARTMENTS
+on MCDEPARTMENTS.DEPARTMENTID = MAJORS.DEPARTMENTID
+where mcdepartments.departmentid = 1;
+
+-- create registration table joining courses with students
+create table Registration (courseid int, studentid int);
+
+- display all students taking the Cybersecurity course
+select MCstudents.FIRSTNAME, MCstudents.LASTNAME, MCstudents.MAJORID, MAJORS.MAJOR, MCdepartments.department
+from MCstudents
+inner join majors
+on majors.majorid = mcstudents.majorid
+inner join MCDEPARTMENTS
+on MCDEPARTMENTS.DEPARTMENTID = MAJORS.DEPARTMENTID
+where majors.major = 'Cybersecurity';
+
+-- display all students in the 'Math and Physics' department
+select MCstudents.firstname, mcstudents.lastname, mcstudents.majorid, majors.major, mcdepartments.department
+from MCstudents
+inner join majors
+on majors.majorid = mcstudents.majorid
+inner join mcdepartments
+on mcdepartments.departmentid = majors.departmentid
+where mcdepartments.department = 'Math and Physics';
 
 
 
